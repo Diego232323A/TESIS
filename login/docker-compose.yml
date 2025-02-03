@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  auth-service:
+    build: .
+    container_name: auth-service
+    ports:
+      - "4002:4002"
+    depends_on:
+      - postgres
+    environment:
+      - PORT=4002
+      - DB_HOST=postgres
+      - DB_USER=admin
+      - DB_PASSWORD=admin123
+      - DB_NAME=users_db
+      - DB_PORT=5432
+      - JWT_SECRET=supersecreto
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: users_db
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
