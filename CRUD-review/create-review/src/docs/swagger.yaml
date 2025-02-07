@@ -1,0 +1,61 @@
+basePath: /api
+definitions:
+  models.Review:
+    description: Modelo de reseña
+    properties:
+      comment:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      rating:
+        type: integer
+      username:
+        type: string
+    type: object
+host: localhost:5005
+info:
+  contact: {}
+  description: API para agregar reseñas de lugares turísticos validando usuario y
+    lugar.
+  title: Microservicio de Creación de Reseñas
+  version: "1.0"
+paths:
+  /reviews:
+    post:
+      consumes:
+      - application/json
+      description: Agrega una reseña validando que el usuario y el lugar existan.
+      parameters:
+      - description: Datos de la reseña
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Reseña creada exitosamente
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Error en la solicitud
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Usuario o lugar no encontrado
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Crear una reseña
+      tags:
+      - Reseñas
+swagger: "2.0"
