@@ -1,0 +1,6 @@
+fastapi
+pymongo
+uvicorn
+python-dotenv
+motor
+swagger-ui-bundle
