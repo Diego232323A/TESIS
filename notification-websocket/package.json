@@ -1,0 +1,22 @@
+{
+  "name": "notification-websocket",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.0.14",
+    "pg": "^8.13.1",
+    "ws": "^8.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "keywords": [],
+  "author": "Diego",
+  "license": "ISC",
+  "description": "Microservicio WebSocket para notificaciones en tiempo real"
+}
