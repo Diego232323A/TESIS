@@ -1,0 +1,70 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Esta es una API para buscar en MongoDB y PostgreSQL.",
+        "title": "Mi API de Búsqueda",
+        "contact": {
+            "name": "Soporte Técnico",
+            "url": "http://www.soporte.com",
+            "email": "soporte@soporte.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/buscar": {
+            "post": {
+                "description": "Este endpoint busca en ambas bases de datos y devuelve el resultado.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Busca en MongoDB y PostgreSQL",
+                "parameters": [
+                    {
+                        "description": "Parámetros de búsqueda",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.Request"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handlers.Request": {
+            "type": "object",
+            "properties": {
+                "valor_mongo": {
+                    "type": "string"
+                },
+                "valor_postgres": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
