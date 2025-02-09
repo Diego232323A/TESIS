@@ -11,7 +11,7 @@ app.use(cors());
 
 app.use("/users", userRoutes);
 swaggerDocs(app);
-//port
+//port isac y karen por siempre
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
