@@ -5,7 +5,7 @@ on:
     paths:
       - 'TESIS/CRUD_user/create-user/**'
     branches:
-      - main
+      - QA
 
 jobs:
   build-and-deploy:
