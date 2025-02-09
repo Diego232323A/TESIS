@@ -17,3 +17,4 @@ app.listen(PORT, () => {
   console.log(`✅ Get-User Service corriendo en http://localhost:${PORT}`);
   console.log(`📄 Swagger disponible en http://localhost:${PORT}/api-docs`);
 });
+
