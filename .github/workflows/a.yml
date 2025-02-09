@@ -3,7 +3,7 @@ name: 🚀 Deploy Category Delete Service to AWS
 on:
   push:
     paths:
-      - 'TESIS/CRUD_user/create-user/**'
+      - 'CRUD_user/create-user/**'
     branches:
       - QA
 
@@ -25,8 +25,8 @@ jobs:
       - name: 📦 Construir y subir imagen Docker
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/create-user:latest \
-            -f TESIS/CRUD_user/create-user/Dockerfile \
-            TESIS/CRUD_user/create-user
+            -f CRUD_user/create-user/Dockerfile \
+            CRUD_user/create-user
 
           docker push ${{ secrets.DOCKER_USERNAME }}/create-user:latest
 
@@ -70,7 +70,7 @@ jobs:
 
             echo "🚀 Running the new container..."
             sudo docker run -d \
-              --name category-delete \
+              --name create-user \
               -p ${{ secrets.SERVER_PORT_CREATE_USER }}:${{ secrets.SERVER_PORT_CREATE_USER }} \
               -e PORT=${{ secrets.SERVER_PORT_CREATE_USER }} \
               -e POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} \
@@ -83,7 +83,7 @@ jobs:
 
             echo "🔍 Verifying deployment..."
             sleep 5
-            if sudo docker ps -q -f name=category-delete; then
+            if sudo docker ps -q -f name=create-user; then
               echo "✅ Deployment successful: Category Delete Service is running."
             else
               echo "❌ Deployment failed: Checking logs..."
