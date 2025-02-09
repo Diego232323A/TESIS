@@ -1,0 +1,46 @@
+basePath: /
+definitions:
+  handlers.Request:
+    properties:
+      valor_mongo:
+        type: string
+      valor_postgres:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: soporte@soporte.com
+    name: Soporte Técnico
+    url: http://www.soporte.com
+  description: Esta es una API para buscar en MongoDB y PostgreSQL.
+  title: Mi API de Búsqueda
+  version: "1.0"
+paths:
+  /buscar:
+    post:
+      consumes:
+      - application/json
+      description: Este endpoint busca en ambas bases de datos y devuelve el resultado.
+      parameters:
+      - description: Parámetros de búsqueda
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Busca en MongoDB y PostgreSQL
+swagger: "2.0"
