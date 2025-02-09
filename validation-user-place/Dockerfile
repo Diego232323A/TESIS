@@ -4,9 +4,9 @@ FROM golang:1.16
 # Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia go.mod y go.sum y descarga las dependencias
-COPY go.mod go.sum ./
-RUN go mod download
+# Copia go.mod y descarga las dependencias
+COPY go.mod ./
+RUN go mod tidy
 
 # Copia el código fuente del proyecto al contenedor
 COPY . .
