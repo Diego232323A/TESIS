@@ -1,0 +1,74 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para eliminar reseñas de lugares turísticos si el usuario es el propietario.",
+        "title": "Microservicio de Eliminación de Reseñas",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/reviews/{id}": {
+            "delete": {
+                "description": "Permite eliminar una reseña si el usuario es el propietario.",
+                "tags": [
+                    "Reseñas"
+                ],
+                "summary": "Eliminar reseña",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID de la reseña",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "ID del usuario propietario",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reseña eliminada correctamente",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error en la solicitud",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Usuario no autorizado",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Reseña no encontrada",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
