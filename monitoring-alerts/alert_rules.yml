@@ -1,0 +1,32 @@
+groups:
+  - name: Resource_Alerts
+    rules:
+      # 🚨 HIGH CPU USAGE ALERT
+      - alert: HighCPUUsage
+        expr: (process_cpu_seconds_total / process_start_time_seconds) * 100 > 80
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alto uso de CPU en {{ $labels.instance }}"
+          description: "El uso de CPU ha excedido el 80% en {{ $labels.instance }} por más de 2 minutos."
+
+      # 🚨 HIGH CPU USAGE ALERT
+      - alert: HighMemoryUsage
+        expr: process_resident_memory_bytes > 500  # MB
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de memoria en {{ $labels.instance }}"
+          description: "El uso de memoria ha excedido 500 MB en {{ $labels.instance }} por más de 2 minutos."
+
+      # 🚨 HIGH CPU USAGE ALERT
+      - alert: HighRequestRate
+        expr: rate(http_requests_total[5m]) > 10
+        for: 1s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alta tasa de solicitudes"
+          description: "Más de 10 solicitudes por segundo"
