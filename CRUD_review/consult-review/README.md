@@ -30,19 +30,19 @@ cd consult-review
 
 ### **3️⃣ Configurar Variables de Entorno**
 
-#### ·Crea un archivo .env con las credenciales de la base de datos
+#### ·Create a .env file with the database credentials
 
-### *4️⃣ Inicia el repositorio*
+### *4️⃣ Start the repository*
 ```sh
 go mod init nombre-de-tu-prouecto    
 ```
 
-### *5️⃣ Instala las dependecias*
+### *5️⃣ Install dependences*
 ```sh
 go mod tidy
 ```
 
-### Por ultimo ejecuta el codigo.
+### Run
 ```sh
 go run main.go
 ```
