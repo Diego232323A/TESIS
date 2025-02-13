@@ -1,0 +1,91 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para agregar reseñas de lugares turísticos validando usuario y lugar.",
+        "title": "Microservicio de Creación de Reseñas",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:5005",
+    "basePath": "/api",
+    "paths": {
+        "/reviews": {
+            "post": {
+                "description": "Agrega una reseña validando que el usuario y el lugar existan.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reseñas"
+                ],
+                "summary": "Crear una reseña",
+                "parameters": [
+                    {
+                        "description": "Datos de la reseña",
+                        "name": "review",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Reseña creada exitosamente",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error en la solicitud",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario o lugar no encontrado",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Review": {
+            "description": "Modelo de reseña",
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

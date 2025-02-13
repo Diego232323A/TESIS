@@ -1,0 +1,50 @@
+info:
+  contact: {}
+  description: API para eliminar reseñas de lugares turísticos si el usuario es el
+    propietario.
+  title: Microservicio de Eliminación de Reseñas
+  version: "1.0"
+paths:
+  /reviews/{id}:
+    delete:
+      description: Permite eliminar una reseña si el usuario es el propietario.
+      parameters:
+      - description: ID de la reseña
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ID del usuario propietario
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Reseña eliminada correctamente
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Error en la solicitud
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Usuario no autorizado
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Reseña no encontrada
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Eliminar reseña
+      tags:
+      - Reseñas
+swagger: "2.0"
