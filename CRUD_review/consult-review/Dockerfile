@@ -1,5 +1,5 @@
 # Utilizar la imagen oficial de Go
-FROM golang:1.23.3
+FROM golang:1.21
 
 # Establecer el directorio de trabajo
 WORKDIR /app
@@ -19,6 +19,12 @@ COPY . .
 # Descargar dependencias y limpiar módulos
 RUN go mod tidy
 
+# **Compilar la aplicación desde el directorio src**
+WORKDIR /app/src
+RUN go build -o /app/consult-review .
+
+# Volver al directorio de trabajo original
+WORKDIR /app
 
 # Exponer el puerto del servicio
 EXPOSE 5008
