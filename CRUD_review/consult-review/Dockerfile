@@ -11,10 +11,10 @@ COPY . .
 RUN go mod tidy
 
 # Compilar la aplicación
-RUN go build -o delete-review .
+RUN go build -o consult-review .
 
 # Exponer el puerto del servicio
 EXPOSE 5008
 
 # Comando para ejecutar la aplicación
-CMD ["/app/delete-review"]
+CMD ["/app/consult-review"]
