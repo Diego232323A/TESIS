@@ -1,0 +1,96 @@
+name: 🚀 Deploy Category Delete Service to AWS
+
+on:
+  push:
+    paths:
+      - 'CRUD_user/delete-user/**'
+    branches:
+      - QA
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛠️ Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Iniciar sesión en Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: 📦 Construir y subir imagen Docker
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/delete-user:latest \
+            -f CRUD_user/delete-user/Dockerfile \
+            CRUD_user/delete-user
+
+          docker push ${{ secrets.DOCKER_USERNAME }}/delete-user:latest
+
+  deploy:
+    name: 🚀 Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+
+    steps:
+      - name: 🚀 Conectar a EC2 y desplegar Category Delete Service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST_DELETE_USER }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "🔍 Checking if Docker is installed..."
+            if ! command -v docker &> /dev/null; then
+              echo "📦 Installing Docker..."
+              sudo yum update -y
+              sudo yum install -y docker
+              sudo systemctl start docker
+              sudo usermod -a -G docker $USER
+            fi
+
+            echo "🛑 Stopping and removing previous container..."
+            if sudo docker ps -q -f name=delete-user; then
+              sudo docker stop delete-user
+              sudo docker rm delete-user
+            else
+              echo "⚠️ No running container found."
+            fi
+
+            echo "🧹 Removing old Docker images..."
+            sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/delete-user:latest || true
+            sudo docker image prune -af || echo "⚠️ No images to remove."
+
+            echo "📥 Pulling the latest Docker image..."
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/delete-user:latest || exit 1
+
+            echo "🚀 Running the new container..."
+            sudo docker run -d \
+              --name delete-user \
+              -p ${{ secrets.SERVER_PORT_DELETE_USER }}:${{ secrets.SERVER_PORT_DELETE_USER }} \
+              -e PORT=${{ secrets.SERVER_PORT_DELETE_USER }} \
+              -e POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} \
+              -e POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} \
+              -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
+              -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+              -e POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
+              -e DB_DIALECT=postgres \
+              ${{ secrets.DOCKER_USERNAME }}/delete-user:latest
+
+            echo "🔍 Verifying deployment..."
+            sleep 5
+            if sudo docker ps -q -f name=delete-user; then
+              echo "✅ Deployment successful: delete-user Service is running."
+            else
+              echo "❌ Deployment failed: Checking logs..."
+              sudo docker logs delete-user
+              exit 1
+            fi
+
+      - name: 🔐 Cerrar sesión en Docker Hub
+        run: docker logout
+        
