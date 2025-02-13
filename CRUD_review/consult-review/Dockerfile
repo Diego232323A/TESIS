@@ -7,11 +7,11 @@ WORKDIR /app
 # Instalar git si no está instalado en la imagen base
 RUN apt-get update && apt-get install -y git
 
-# Copiar el archivo go.mod para aprovechar la caché de Docker
-COPY go.mod ./
+# Copiar los archivos go.mod y go.sum para aprovechar la caché de Docker
+COPY go.mod go.sum ./
 
-# Descargar dependencias sin el archivo go.sum
-RUN go mod tidy
+# Descargar dependencias
+RUN go mod download
 
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
