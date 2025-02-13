@@ -22,6 +22,7 @@ DB_PASSWORD=admin123
 DB_NAME=users_db
 DB_PORT=5432
 CORS_ORIGIN=*
+```
 
 2️⃣ Instalar Dependencias
 ``npm install
