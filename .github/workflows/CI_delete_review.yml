@@ -36,7 +36,7 @@ jobs:
     needs: build-and-deploy
 
     steps:
-      - name: 🚀 Conectar a EC2 y desplegar Category Delete Service
+      - name: 🚀 Conectar a EC2 y desplegar delete-review
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST_DELETE_REVIEW }}
