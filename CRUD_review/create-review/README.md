@@ -1,31 +1,34 @@
-# Microservicio: Creación de Reseñas
+# Microservice: Creating Reviews
 
-Este microservicio permite la creación de reseñas para lugares turísticos, validando que el usuario y el lugar existan previamente.
+This microservice allows the creation of reviews for tourist places, validating that the user and the place already exist.
 
-## 🚀 Tecnologías utilizadas
-- **Lenguaje**: Go
-- **Base de datos**: PostgreSQL
+## 🚀 Technologies used
+- **Lenguage**: Go
+- **Data Base**: PostgreSQL
 - **Framework**: Gorilla Mux
 - **Swagger**: Para documentación de API
 - **Docker**: Para contenedorización
 
-## 📌 Instalación y ejecución
+## 📌 Installation and execution
 
-### 1️⃣ Clonar el repositorio
+### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/usuario/create-review.git
 cd create-review
+```
 
-### 2️⃣ Configurar las variables de entorno
+### 2️⃣ Setting environment variables
 ```bash
-Crear un archivo .env en la raíz del proyecto:
-DB_HOST=localhost
-DB_NAME=reviews_db
-DB_USER=postgres
-DB_PASSWORD=12345
-DB_PORT=5432
+Create a .env file in the root of the project:
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_PORT=
 VALIDATION_SERVICE_URL=http://localhost:8080
+```
 
-📖 Endpoints (Swagger)
+### 📖 Endpoints (Swagger)
 ```bash
-Documentación API: http://localhost:5005/swagger/index.html
+Documentation API: http://localhost:5005/swagger/index.html
+```
