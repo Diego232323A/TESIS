@@ -4,10 +4,16 @@ FROM golang:1.21
 # Establecer el directorio de trabajo
 WORKDIR /app
 
+# Copiar go.mod y go.sum primero para aprovechar la caché de Docker
+COPY go.mod go.sum ./
+
+# Descargar dependencias
+RUN go mod download
+
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
 
-# Descargar dependencias
+# Descargar dependencias y limpiar módulos
 RUN go mod tidy
 
 # Compilar la aplicación
