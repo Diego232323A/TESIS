@@ -4,11 +4,14 @@ FROM golang:1.21
 # Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar go.mod y go.sum primero para aprovechar la caché de Docker
+# Instalar git si no está instalado en la imagen base
+RUN apt-get update && apt-get install -y git
+
+# Copiar el archivo go.mod para aprovechar la caché de Docker
 COPY go.mod ./
 
-# Descargar dependencias
-RUN go mod download
+# Descargar dependencias sin el archivo go.sum
+RUN go mod tidy
 
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
