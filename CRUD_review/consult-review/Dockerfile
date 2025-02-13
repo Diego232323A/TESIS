@@ -5,7 +5,7 @@ FROM golang:1.21
 WORKDIR /app
 
 # Copiar go.mod y go.sum primero para aprovechar la caché de Docker
-COPY go.mod go.sum ./
+COPY go.mod ./
 
 # Descargar dependencias
 RUN go mod download
