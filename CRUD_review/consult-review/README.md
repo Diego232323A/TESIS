@@ -22,27 +22,21 @@ CREATE TABLE reviews (
 );
 ```
 
-### **2️⃣ Clonar el Repositorio**
-```sh
-git clone https://github.com/tu-repo/consult-review.git
-cd consult-review
-```
-
-### **3️⃣ Configurar Variables de Entorno**
+### **2️⃣ Configurar Variables de Entorno**
 
 #### ·Create a .env file with the database credentials
 
-### *4️⃣ Start the repository*
+### *3️⃣ Start the repository*
 ```sh
 go mod init nombre-de-tu-prouecto    
 ```
 
-### *5️⃣ Install dependences*
+### *4️⃣ Install dependences*
 ```sh
 go mod tidy
 ```
 
-### Run
+### 5️⃣Run
 ```sh
 go run main.go
 ```
