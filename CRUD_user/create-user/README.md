@@ -24,11 +24,15 @@ DB_PORT=5432
 CORS_ORIGIN=*
 ```
 
-2️⃣ Instalar Dependencias
-``npm install
+## 2️⃣ Instalar Dependencias
+``
+npm install
+``
 
-3️⃣ Ejecutar en Modo Desarrollo
-``npm run dev
+## 3️⃣ Ejecutar en Modo Desarrollo
+``
+npm run dev
+``
 
 📖 API Endpoints
 📝 Documentación con Swagger
