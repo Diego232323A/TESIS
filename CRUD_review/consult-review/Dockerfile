@@ -1,18 +1,27 @@
-# Usar una imagen base de Golang
-FROM golang:1.20
+# Utilizar la imagen oficial de Go
+FROM golang:1.23.3
 
-# Establecer el directorio de trabajo dentro del contenedor
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar los archivos del proyecto al contenedor
+# Instalar git si no está instalado en la imagen base
+RUN apt-get update && apt-get install -y git
+
+# Copiar los archivos go.mod y go.sum para aprovechar la caché de Docker
 COPY go.mod go.sum ./
+
+# Descargar dependencias
 RUN go mod download
 
-# Copiar el código fuente al contenedor
+# Copiar todos los archivos del proyecto al contenedor
 COPY . .
 
-# Exponer el puerto donde corre el servicio
-EXPOSE 5005
+# Descargar dependencias y limpiar módulos
+RUN go mod tidy
 
-# Comando para ejecutar el microservicio
-CMD ["./create-review"]
+
+# Exponer el puerto del servicio
+EXPOSE 5008
+
+# Comando para ejecutar la aplicación
+CMD ["/app/consult-review"]
