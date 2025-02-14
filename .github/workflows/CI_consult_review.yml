@@ -55,8 +55,8 @@ jobs:
 
             echo "🛑 Stopping and removing previous container..."
             if sudo docker ps -q -f name=consult-review; then
-              sudo docker stop consult-review
-              sudo docker rm consult-review
+              sudo docker stop consult-review || true
+              sudo docker rm consult-review || true
             else
               echo "⚠️ No running container found."
             fi
