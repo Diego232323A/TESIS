@@ -70,7 +70,7 @@ jobs:
 
             echo "🚀 Running the new container..."
             sudo docker run -d \
-              --name consult-user \
+              --name consult-review \
               -p ${{ secrets.SERVER_PORT_CONSULT_REVIEW }}:${{ secrets.SERVER_PORT_CONSULT_REVIEW }} \
               -e PORT=${{ secrets.SERVER_PORT_CONSULT_REVIEW }} \
               -e POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} \
