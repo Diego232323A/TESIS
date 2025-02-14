@@ -90,7 +90,4 @@ jobs:
               sudo docker logs consult-review
               exit 1
             fi
-
-      - name: 🔐 Cerrar sesión en Docker Hub
-        run: docker logout
         
