@@ -8,13 +8,13 @@ Microservicio para eliminar usuarios en la plataforma.
 Crea un archivo **`.env`** en la raíz:
 
 ```env
-PORT=4003
-DB_HOST=postgres
-DB_USER=admin
-DB_PASSWORD=admin123
-DB_NAME=users_db
-DB_PORT=5432
-JWT_SECRET=supersecreto
+PORT=
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_PORT=
+JWT_SECRET=
 
 2️⃣ Instalar Dependencias
 ``npm install
