@@ -1,0 +1,46 @@
+definitions:
+  models.Place:
+    properties:
+      id:
+        type: integer
+      lat:
+        type: number
+      lng:
+        type: number
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /places/nearby:
+    get:
+      description: Devuelve los lugares dentro de un radio de 5 km
+      parameters:
+      - description: Latitud
+        in: query
+        name: lat
+        required: true
+        type: number
+      - description: Longitud
+        in: query
+        name: lng
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Place'
+            type: array
+        "400":
+          description: Error en los parámetros
+          schema:
+            type: string
+      summary: Obtener lugares cercanos
+      tags:
+      - Places
+swagger: "2.0"
