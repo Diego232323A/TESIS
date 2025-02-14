@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y git
 
 # Copiar los archivos go.mod y go.sum para aprovechar la caché de Docker
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 # Descargar dependencias
 RUN go mod download
