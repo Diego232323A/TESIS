@@ -37,7 +37,7 @@ app.post("/alert", async (req, res) => {
     res.status(200).json({ message: "Alertas guardadas" });
 });
 
-const PORT = process.env.PORT || 5009;
+const PORT = process.env.PORT || 5010;
 app.listen(PORT, () => {
     console.log(`🚀 Microservicio de monitoreo corriendo en el puerto ${PORT}`);
 });
