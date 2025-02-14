@@ -1,4 +1,4 @@
-name: 🚀 Deploy Category Delete Service to AWS
+name: 🚀 Deploy consult.user Service to AWS
 
 on:
   push:
