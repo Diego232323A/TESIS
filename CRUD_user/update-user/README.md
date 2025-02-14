@@ -35,3 +35,4 @@ http://localhost:4004/api-docs
 
 ### 🛠️ Endpoints
 ``PUT	/api/user/:username	Actualizar usuario por username (requiere JWT)
+``
