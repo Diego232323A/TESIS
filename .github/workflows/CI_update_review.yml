@@ -1,4 +1,4 @@
-name: 🚀 Deploy Category Delete Service to AWS
+name: 🚀 Deploy update-review Service to AWS
 
 on:
   push:
