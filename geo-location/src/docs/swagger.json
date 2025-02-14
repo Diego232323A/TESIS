@@ -1,0 +1,72 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/places/nearby": {
+            "get": {
+                "description": "Devuelve los lugares dentro de un radio de 5 km",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Places"
+                ],
+                "summary": "Obtener lugares cercanos",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "Latitud",
+                        "name": "lat",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Longitud",
+                        "name": "lng",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Place"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error en los parámetros",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Place": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "lat": {
+                    "type": "number"
+                },
+                "lng": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
