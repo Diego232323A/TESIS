@@ -60,6 +60,6 @@ app.post("/send-notification", async (req, res) => {
 
 
 // Iniciar servidor
-server.listen(8080, () => {
-    console.log("Servidor escuchando en http://localhost:8080");
+server.listen(8081, () => {
+    console.log("Servidor escuchando en http://localhost:8081");
 });
